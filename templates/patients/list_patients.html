@@ -1,0 +1,173 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'base/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'base/plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'base/plugins/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'base/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'base/plugins/toastr/toastr.min.css' %}">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+
+{% endblock css %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Clientes</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Clientes</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="col-md-2">
+                                    <button type="button" id="create-patients" class="btn btn-primary btn-block"><i
+                                            class="fas fa-edit"></i>Adicionar
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Nome Social</th>
+                                        <th>CPF</th>
+                                        <th>RG</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for patient in patients %}
+                                        <tr>
+                                            <td>{{ patient.full_name }}</td>
+                                            <td>{{ patient.social_name }}</td>
+                                            <td>{{ patient.cpf }}</td>
+                                            <td>{{ patient.rg }}</td>
+                                            <td>X</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+                <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="{% static 'base/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'base/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'base/plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'base/plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'base/plugins/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'base/plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'base/plugins/jszip/jszip.min.js' %}"></script>
+    <script src="{% static 'base/plugins/pdfmake/pdfmake.min.js' %}"></script>
+    <script src="{% static 'base/plugins/pdfmake/vfs_fonts.js' %}"></script>
+    <script src="{% static 'base/plugins/datatables-buttons/js/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'base/plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
+    <script src="{% static 'base/plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+
+    <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+    <!-- You can alternatively load the minified version -->
+    <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+
+    <script src="{% static 'base/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- SweetAlert2 -->
+    <script src="{% static 'base/plugins/sweetalert2/sweetalert2.min.js' %}"></script>
+    <!-- Toastr -->
+    <script src="{% static 'base/plugins/toastr/toastr.min.js' %}"></script>
+
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                },
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#create-patients").modalForm({
+                formURL: "{% url 'patients:patient_create' %}"
+            });
+
+        });
+
+    </script>
+
+    <script>
+
+
+        {% if messages == True %}
+            document.addEventListener("DOMContentLoaded", function (event) {
+                toastr.options = {
+                    "closeButton": true, "debug": false, "newestOnTop": true,
+                    "progressBar": false, "positionClass": "toast-top-right", "preventDuplicates": true,
+                    "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000",
+                    "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear",
+                    "showMethod": "fadeIn", "hideMethod": "fadeOut"
+                };
+                {% autoescape off %}
+                    {% for msg in messages %}
+                        toastr.{{ msg.level_tag }}("{{ msg }}");
+                        console.log("{{ msg }}")
+                    {% endfor %}
+                {% endautoescape %}
+            });
+        {% endif %}
+
+    </script>
+{% endblock scripts %}

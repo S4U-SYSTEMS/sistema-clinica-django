@@ -25,9 +25,14 @@ INSTALLED_APPS = [
     # libis
     'safedelete',
     'global_permissions',
+    'bootstrap_modal_forms',
+    'widget_tweaks',
+    'tempus_dominus',
 
     'apps.base',
-    'apps.users'
+    'apps.users',
+    'apps.home',
+    'apps.patients',
 ]
 
 MIDDLEWARE = [
