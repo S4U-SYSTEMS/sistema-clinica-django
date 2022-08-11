@@ -24,4 +24,3 @@ class ScheduleForm(BSModalModelForm):
     class Meta:
         model = Schedule
         fields = '__all__'
-

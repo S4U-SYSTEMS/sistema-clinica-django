@@ -23,4 +23,3 @@ class PatientsForm(BSModalModelForm):
     class Meta:
         model = Patients
         fields = '__all__'
-
