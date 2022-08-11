@@ -1,7 +1,7 @@
 from .models import Patients
 from bootstrap_modal_forms.forms import BSModalModelForm
 from django import forms
-from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
+from tempus_dominus.widgets import DatePicker
 
 
 class PatientsForm(BSModalModelForm):
