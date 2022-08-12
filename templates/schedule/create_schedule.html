@@ -1,0 +1,40 @@
+{% load widget_tweaks %}
+{% load static %}
+
+<form method="post" action="">
+    {{ form.media }}
+    {% csrf_token %}
+
+    <div class="modal-header">
+        <h5 class="modal-title">Novo Agendamento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>{{ form.patient.label }}</label>
+                    {% render_field form.patient class="form-control" %}
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>{{ form.Schedule_day.label }}</label>
+                    {% render_field form.Schedule_day class="form-control" %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>
+
+</form>
+

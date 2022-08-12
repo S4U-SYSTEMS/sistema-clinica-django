@@ -1,1 +1,156 @@
 {% extends 'base/base.html' %}
+{% load name_reduced %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Dashboard</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Small boxes (Stat box) -->
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>{{ cont_appointments }}</h3>
+
+                                <p>Atendimentos do Dia</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-bag"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ completed_appointments }}</h3>
+
+                                <p>Atendimentos Concluídos</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>1</h3>
+
+                                <p>Novos Clientes Hoje</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person-add"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>0</h3>
+
+                                <p>Atendimentos Cancelados</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-pie-graph"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                </div>
+                <!-- /.row -->
+                <!-- Main row -->
+                <div class="row">
+                    <!-- Left col -->
+                    <section class="col-lg-12 connectedSortable">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="ion ion-clipboard mr-1"></i>
+                                    Atendimentos de Hoje
+                                </h3>
+
+                                <div class="card-tools">
+                                    <ul class="pagination pagination-sm">
+                                        <li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
+                                        <li class="page-item"><a href="#" class="page-link">1</a></li>
+                                        <li class="page-item"><a href="#" class="page-link">2</a></li>
+                                        <li class="page-item"><a href="#" class="page-link">3</a></li>
+                                        <li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="row">
+                                    {% for schedules in schedules %}
+                                        <div class="col-md-4 col-6">
+                                            <div class="small-box bg-success">
+                                                <div class="info-box bg-success">
+                                                    <span class="info-box-icon"><i
+                                                            class="far fa-calendar-alt"></i></span>
+
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Dr: Ronaldo </span>
+                                                        <span class="info-box-number">Paciente: {{ schedules.patient.full_name|first_name_reduced }}</span>
+
+                                                        <span class="progress-description">Horário: {{ schedules.Schedule_day|date:"h:m" }}</span>
+                                                    </div>
+                                                    <!-- /.info-box-content -->
+                                                </div>
+                                                <a href="#" class="small-box-footer">Concluir <i
+                                                        class="fas fa-arrow-circle-right"></i></a>
+                                            </div>
+                                        </div>
+                                    {% empty %}
+                                        <div class="col-lg-3 col-6">
+                                            <span>Sem Consultas Agendadas</span>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer clearfix">
+                                <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i>
+                                    Agendar
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </section>
+                </div>
+                <!-- /.row (main row) -->
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock content %}

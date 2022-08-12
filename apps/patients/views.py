@@ -19,5 +19,3 @@ class PatientListView(SuccessMessageMixin, ListView):
     success_message = 'Success: Paciente criado.'
     context_object_name = 'patients'
     template_name = 'patients/list_patients.html'
-
-
