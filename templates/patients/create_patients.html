@@ -1,0 +1,83 @@
+{% load widget_tweaks %}
+{% load static %}
+
+<form method="post" action="">
+    {{ form.media }}
+    {% csrf_token %}
+
+    <div class="modal-header">
+        <h5 class="modal-title">Novo Paciente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>{{ form.full_name.label }}</label>
+                    {% render_field form.full_name class="form-control" placeholder="Nome ..." %}
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>{{ form.social_name.label }}</label>
+                    {% render_field form.social_name class="form-control" placeholder="Nome Social ..." %}
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>{{ form.cpf.label }}</label>
+                    {% render_field form.cpf class="form-control" placeholder="CPF ..." %}
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>{{ form.rg.label }}</label>
+                    {% render_field form.rg class="form-control" placeholder="RG ..." %}
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>{{ form.birth_date.label }}</label>
+                    {% render_field form.birth_date class="form-control" %}
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>{{ form.genre.label }}</label>
+                    {% render_field form.genre class="form-control" %}
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>{{ form.ethnicity.label }}</label>
+                    {% render_field form.ethnicity class="form-control" %}
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>{{ form.health_insurance.label }}</label>
+                    {% render_field form.health_insurance class="form-control" placeholder="Convenio ..." %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>
+
+</form>
+

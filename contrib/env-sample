@@ -1,0 +1,7 @@
+DEBUG=True
+TEMPLATE_DEBUG=%(DEBUG)s
+SECRET_KEY=ARANDOMSECRETKEY
+DATABASE_URL=mysql://myuser:mypassword@myhost/mydatabase
+PERCENTILE=90%%
+DEV_DATABASE_URL=postgresql://postgres:mod64@172.16.1.9:5432/clinica?schema=public
+PROD_DATABASE_URL=
